@@ -23,7 +23,6 @@ class App extends React.Component {
   }
 
   updateAddressSearchState() {
-    console.log(this.state.address);
     return e => this.setState({
       address: e.currentTarget.value
     });
