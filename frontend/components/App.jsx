@@ -8,7 +8,7 @@ import {
   HashRouter
 } from 'react-router-dom';
 
-import { fetchAddress } from '../util/address_api_util';
+//import { fetchAddress } from '../util/address_api_util';
 
 import AddressShowContainer from './address_show_container';
 
@@ -16,6 +16,23 @@ class App extends React.Component {
 
   constructor() {
     super();
+    this.state = {
+      address: ""
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  updateAddressSearchState() {
+    console.log(this.state.address);
+    return e => this.setState({
+      address: e.currentTarget.value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log("Wadup");
+    this.props.fetchAddress(this.state.address);
   }
 
   render() {
@@ -24,9 +41,9 @@ class App extends React.Component {
 
         <h1>Blocklist</h1>
 
-        <form onSubmit={fetchAddress('1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY')}>
-          <input type="text" />
-          <input type="button" value="Find address" />
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" onChange={this.updateAddressSearchState()} />
+          <input type="submit" value="Find address" />
         </form>
 
       </div>
