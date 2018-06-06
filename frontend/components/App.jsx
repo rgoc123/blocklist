@@ -28,10 +28,25 @@ class App extends React.Component {
     });
   }
 
+  fetchAddress3(addressId) {
+    fetch(`https://blockchain.info/rawaddr/${addressId}`, {
+      method: 'GET',
+      credentials: 'same-origin',
+      mode: 'cors'
+    })
+      .then(function(myJson) {
+        console.log(myJson);
+      });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     console.log("Wadup");
-    this.props.fetchAddress(this.state.address);
+    this.fetchAddress3(this.state.address);//.then(data => (
+    //   console.log(data)
+    // ), err => (
+    //   console.log(err.responseJSON)
+    // ));
   }
 
   render() {
