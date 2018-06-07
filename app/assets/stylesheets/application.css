@@ -23,4 +23,104 @@
 
 h1 {
   background-color: #074B7A;
+  color: white;
+  height: 90px;
+  text-align: center;
+  line-height: 90px;
+}
+
+form {
+  margin: 0 auto;
+  background-color: #074B7A;
+  padding: 0px 20px 20px 20px;
+}
+
+#input-search-address {
+  width: 320px;
+  height: 32px;
+  background-color: #074B7A;
+  border-radius: 16px;
+  border: 1px solid #fff;
+  display: block;
+  margin: 0px auto 15px auto;
+  color: white;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+}
+
+#input-search-submit {
+  background: #00aee6;
+  border-radius: 16px;
+  border: 1px solid #fff;
+  display: block;
+  font-size: 12px;
+  height: 32px;
+  letter-spacing: normal;
+  line-height: 12px;
+  padding: 11px 20px !important;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: white;
+  font-weight: bold;
+  margin: 5px auto;
+}
+
+#address {
+  width: 960px;
+  display: flex;
+  margin: 20px auto;
+}
+
+#address span {
+  display: block;
+}
+
+#address-info {
+  margin-right: 40px;
+}
+
+#address-info span {
+  margin: 10px 0px;
+}
+
+.address-info-title {
+  font-size: 24px;
+}
+
+#address-address {
+  margin-top: 0px;
+  font-size: 24px;
+}
+
+#address-info-balance {
+  margin-top: 20px;
+}
+
+#transactions-info {
+  margin-top: 10px;
+}
+
+#transactions {
+  height: 350px;
+  overflow: auto;
+}
+
+#transactions span {
+  margin-top: 5px;
+}
+
+li {
+  list-style: none;
+  margin: 15px 0;
+}
+
+li:first-of-type {
+  margin-top: 0px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
 }

@@ -31,21 +31,6 @@ class App extends React.Component {
     });
   }
 
-  fetchAddress3(addressId) {
-    fetch(`https://blockchain.info/rawaddr/${addressId}`, {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST",
-        "Access-Control-Allow-Headers": "Content-Type"
-      }
-    })
-      .then(function(data) {console.log(data.address);},
-        function(err) {console.log(err);});
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     let data = this.props.fetchAddress2(this.state.address);
@@ -68,7 +53,10 @@ class App extends React.Component {
       if (txs.length > 0) {
         return txs.map(tx => (
           <li key={tx.hash}>
-            <span>Block Height: {tx.block_height}</span>
+            <span>Tx Index:</span>
+            <span>{tx.tx_index}</span>
+            <span>Tx Hash:</span>
+            <span>{tx.hash}</span>
           </li>
         ));
       }
@@ -78,12 +66,23 @@ class App extends React.Component {
       return null;
     } else {
       return (
-        <div>
-          <div>Bitcoin Address: {this.state.currentShownAddress}</div>
-          <div>Address Balance: {this.state.currentShownBalance}</div>
-          <ul>
-            {makeTxLIs(txs)}
-          </ul>
+        <div id="address">
+          <div id="address-info">
+            <div>
+              <span className="address-info-title">Bitcoin Address:</span>
+              <span>{this.state.currentShownAddress}</span>
+            </div>
+            <div id="address-info-balance">
+              <span className="address-info-title">Address Balance:</span>
+              <span>{this.state.currentShownBalance}</span>
+            </div>
+          </div>
+          <div id="transactions-info">
+            <span className="address-info-title">Transactions</span>
+            <ul id="transactions">
+              {makeTxLIs(txs)}
+            </ul>
+          </div>
         </div>
       );
     }
@@ -96,8 +95,13 @@ class App extends React.Component {
         <h1>BLOCKLIST</h1>
 
         <form onSubmit={this.handleSubmit}>
-          <input type="text" onChange={this.updateAddressSearchState()} />
-          <input type="submit" value="Find address" />
+          <input id="input-search-address"
+            type="text"
+            onChange={this.updateAddressSearchState()}
+            placeholder="SEARCH BITCOIN ADDRESS" />
+          <input id="input-search-submit"
+            type="submit"
+            value="FIND ADDRESS" />
         </form>
 
         {this.createAddressDiv()}
