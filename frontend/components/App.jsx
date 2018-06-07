@@ -17,7 +17,9 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      address: ""
+      searchAddress: "",
+      currentShownAdress: "",
+      currentShownAdressTxs: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -31,22 +33,21 @@ class App extends React.Component {
   fetchAddress3(addressId) {
     fetch(`https://blockchain.info/rawaddr/${addressId}`, {
       method: 'GET',
-      credentials: 'same-origin',
-      mode: 'cors'
+      mode: 'cors',
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST",
+        "Access-Control-Allow-Headers": "Content-Type"
+      }
     })
-      .then(function(myJson) {
-        console.log(myJson);
-      });
+      .then(function(data) {console.log(data);},
+        function(err) {console.log(err);});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("Wadup");
-    this.fetchAddress3(this.state.address);//.then(data => (
-    //   console.log(data)
-    // ), err => (
-    //   console.log(err.responseJSON)
-    // ));
+    this.props.fetchAddress2(this.state.address);
   }
 
   render() {
