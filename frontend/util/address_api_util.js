@@ -29,6 +29,21 @@ export const fetchAddress2 = (addressId) => {
     method: 'GET',
     async: false,
     success: (data) => { return data; },
-    error: (err) => console.log(err)
+    error: (err) => { return "error"; }
   });
+};
+
+export const fetchAddress3 = (addressId) => {
+  fetch(`https://blockchain.info/rawaddr/${addressId}`, {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST",
+      "Access-Control-Allow-Headers": "Content-Type"
+    }
+  })
+    .then(function(data) {console.log(data.address);},
+      function(err) {console.log(err);});
 };

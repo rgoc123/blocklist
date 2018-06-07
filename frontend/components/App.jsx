@@ -8,8 +8,6 @@ import {
   HashRouter
 } from 'react-router-dom';
 
-//import { fetchAddress } from '../util/address_api_util';
-
 import AddressShowContainer from './address_show_container';
 
 class App extends React.Component {
@@ -31,23 +29,27 @@ class App extends React.Component {
     });
   }
 
+  // Create render errors
+  // Maybe by setting a state to error and adding an else if statement to createAddressDiv
+
   handleSubmit(e) {
     e.preventDefault();
     let data = this.props.fetchAddress2(this.state.address);
-    console.log(data.responseJSON);
-    this.setState({
-      currentShownAddress: data.responseJSON.address,
-      currentShownBalance: data.responseJSON.final_balance,
-      currentShownTxs: data.responseJSON.txs
-    });
+    debugger
+    if (data.status !== 200) {
+      this.setState({
+        currentShownAddress: "error"
+      });
+    } else {
+      this.setState({
+        currentShownAddress: data.responseJSON.address,
+        currentShownBalance: data.responseJSON.final_balance,
+        currentShownTxs: data.responseJSON.txs
+      });
+    }
   }
 
-  // Create funciton that returns a div with the address and balance spans
-  // and the ul with transcation li's
-  // If there is no current balance then show nothing, else show the div
-
   createAddressDiv() {
-    // Having a binding issue I think
     let txs = this.state.currentShownTxs;
     function makeTxLIs(txs) {
       if (txs.length > 0) {
@@ -64,6 +66,12 @@ class App extends React.Component {
 
     if (this.state.currentShownAddress === "") {
       return null;
+    } else if (this.state.currentShownAddress === "error") {
+      return (
+        <div id="error-message">
+          <p>We're sorry. Either the address you entered is invalid or we don't have information on that particular address.</p>
+        </div>
+      );
     } else {
       return (
         <div id="address">
