@@ -67,7 +67,7 @@ class App extends React.Component {
     function makeTxLIs(txs) {
       if (txs.length > 0) {
         return txs.map(tx => (
-          <li>
+          <li key={tx.hash}>
             <span>Block Height: {tx.block_height}</span>
           </li>
         ));
@@ -79,9 +79,11 @@ class App extends React.Component {
     } else {
       return (
         <div>
-          <span>{this.state.currentShownAddress}</span>
-          <span>{this.state.currentShownBalance}</span>
-          {makeTxLIs(txs)}
+          <div>Bitcoin Address: {this.state.currentShownAddress}</div>
+          <div>Address Balance: {this.state.currentShownBalance}</div>
+          <ul>
+            {makeTxLIs(txs)}
+          </ul>
         </div>
       );
     }
@@ -91,7 +93,7 @@ class App extends React.Component {
     return (
       <div className="app-container">
 
-        <h1>Blocklist</h1>
+        <h1>BLOCKLIST</h1>
 
         <form onSubmit={this.handleSubmit}>
           <input type="text" onChange={this.updateAddressSearchState()} />
