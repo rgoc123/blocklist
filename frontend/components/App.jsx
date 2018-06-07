@@ -18,8 +18,9 @@ class App extends React.Component {
     super();
     this.state = {
       searchAddress: "",
-      currentShownAdress: "",
-      currentShownAdressTxs: []
+      currentShownAddress: "",
+      currentShownBalance: 0,
+      currentShownTxs: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -41,13 +42,49 @@ class App extends React.Component {
         "Access-Control-Allow-Headers": "Content-Type"
       }
     })
-      .then(function(data) {console.log(data);},
+      .then(function(data) {console.log(data.address);},
         function(err) {console.log(err);});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.fetchAddress2(this.state.address);
+    let data = this.props.fetchAddress2(this.state.address);
+    console.log(data.responseJSON);
+    this.setState({
+      currentShownAddress: data.responseJSON.address,
+      currentShownBalance: data.responseJSON.final_balance,
+      currentShownTxs: data.responseJSON.txs
+    });
+  }
+
+  // Create funciton that returns a div with the address and balance spans
+  // and the ul with transcation li's
+  // If there is no current balance then show nothing, else show the div
+
+  createAddressDiv() {
+    // Having a binding issue I think
+    let txs = this.state.currentShownTxs;
+    function makeTxLIs(txs) {
+      if (txs.length > 0) {
+        return txs.map(tx => (
+          <li>
+            <span>Block Height: {tx.block_height}</span>
+          </li>
+        ));
+      }
+    }
+
+    if (this.state.currentShownAddress === "") {
+      return null;
+    } else {
+      return (
+        <div>
+          <span>{this.state.currentShownAddress}</span>
+          <span>{this.state.currentShownBalance}</span>
+          {makeTxLIs(txs)}
+        </div>
+      );
+    }
   }
 
   render() {
@@ -60,6 +97,8 @@ class App extends React.Component {
           <input type="text" onChange={this.updateAddressSearchState()} />
           <input type="submit" value="Find address" />
         </form>
+
+        {this.createAddressDiv()}
 
       </div>
     );
