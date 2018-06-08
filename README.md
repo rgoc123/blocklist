@@ -4,9 +4,11 @@ BLOCKLIST is an application that uses the blockchain.info API to find balance an
 
 Simply enter a bitcoin address in the search field to see the data for that address.
 
-Due Cross-Origin Resource Sharing issues, you must use Google Chrome and add the Allow-Control-Allow-Origin extension, which is linked below.
-
 ![alt text](./app/assets/images/blocklist.gif)
+
+Due Cross-Origin Resource Sharing (CORS), you must use Google Chrome and add the Allow-Control-Allow-Origin extension and turn it on. It's linked below.
+
+![alt text](./app/assets/images/acao.png)
 
 
 ### Technologies Used
