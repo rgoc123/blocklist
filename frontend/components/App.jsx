@@ -34,50 +34,52 @@ class App extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let data = this.props.fetchAddress(this.state.searchAddress);
-    if (data.status !== 200) {
-      this.setState({
-        currentShownAddress: "error"
-      });
-    } else {
-      this.setState({
-        currentShownAddress: data.responseJSON.address,
-        currentShownBalance: data.responseJSON.final_balance,
-        currentShownTxs: data.responseJSON.txs
-      });
-    }
 
-    // Below is an example of attempting to use fetch with headers and
-    // then promises. When the CORS Chrome extension is enabled it
-    // works, but not otherwise.
-    // let searchURL = "https://blockchain.info/rawaddr/" + this.state.searchAddress;
-    // fetch(searchURL, {
-    //   method: 'GET',
-    //   async: false,
-    //   mode: "cors",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Origin": "",
-    //     "Access-Control-Allow-Origin": "*://*/*",
-    //     "Access-Control-Allow-Methods": "GET, POST",
-    //     "Access-Control-Allow-Headers": "Content-Type"
-    //   }
-    // }).then((data) => {
-    //   if (data.ok) {
-    //     data.json().then((newData) => {
-    //       console.log(newData);
-    //       this.setState({
-    //         currentShownAddress: newData.address,
-    //         currentShownBalance: newData.final_balance,
-    //         currentShownTxs: newData.txs
-    //       });
-    //     });
-    //   } else {
-    //     this.setState({
-    //       currentShownAddress: "error"
-    //     });
-    //   }
-    // });
+    let searchURL = "https://blockchain.info/rawaddr/" + this.state.searchAddress;
+    fetch(searchURL, {
+      method: 'GET',
+      async: false,
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Origin": "",
+        "Access-Control-Allow-Origin": "*://*/*",
+        "Access-Control-Allow-Methods": "GET, POST",
+        "Access-Control-Allow-Headers": "Content-Type"
+      }
+    }).then((data) => {
+      if (data.ok) {
+        data.json().then((newData) => {
+          console.log(newData);
+          this.setState({
+            currentShownAddress: newData.address,
+            currentShownBalance: newData.final_balance,
+            currentShownTxs: newData.txs
+          });
+        });
+      } else {
+        this.setState({
+          currentShownAddress: "error"
+        });
+      }
+    });
+
+    // Below is a previous example of using an AJAX
+    // request to accomplish the same as above. The
+    // above was used to implement more modern web
+    // standards.
+    // let data = this.props.fetchAddress(this.state.searchAddress);
+    // if (data.status !== 200) {
+    //   this.setState({
+    //     currentShownAddress: "error"
+    //   });
+    // } else {
+    //   this.setState({
+    //     currentShownAddress: data.responseJSON.address,
+    //     currentShownBalance: data.responseJSON.final_balance,
+    //     currentShownTxs: data.responseJSON.txs
+    //   });
+    // }
   }
 
   createAddressDiv() {
