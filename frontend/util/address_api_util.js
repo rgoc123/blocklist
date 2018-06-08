@@ -1,5 +1,17 @@
 export const fetchAddress = (addressId) => {
   return $.ajax({
+    url: `https://blockchain.info/rawaddr/${addressId}?cors=true`,
+    method: 'GET',
+    async: false,
+    success: (data) => { return data; },
+    error: (err) => { return "error"; }
+  });
+};
+
+// Scrapyard of attempts at using request headers to
+// solve the CORS issue
+export const fetchAddress2 = (addressId) => {
+  return $.ajax({
     url: `https://blockchain.info/rawaddr/${addressId}cors=true`,
     method: 'GET',
     async: false,
@@ -23,16 +35,6 @@ export const fetchAddress = (addressId) => {
   });
 };
 
-export const fetchAddress2 = (addressId) => {
-  return $.ajax({
-    url: `https://blockchain.info/rawaddr/${addressId}`,
-    method: 'GET',
-    async: false,
-    success: (data) => { return data; },
-    error: (err) => { return "error"; }
-  });
-};
-
 export const fetchAddress3 = (addressId) => {
   fetch(`https://blockchain.info/rawaddr/${addressId}`, {
     method: 'GET',
@@ -46,4 +48,39 @@ export const fetchAddress3 = (addressId) => {
   })
     .then(function(data) {console.log(data.address);},
       function(err) {console.log(err);});
+};
+
+export const fetchAddress4 = (addressId) => {
+  return $.ajax({
+    url: `https://blockchain.info/rawaddr/${addressId}?cors=true`,
+    method: 'GET',
+    async: false,
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*://*/*",
+      "Access-Control-Allow-Methods": "GET, POST",
+      "Access-Control-Allow-Headers": "Content-Type"
+    },
+    success: (data) => { return data; },
+    error: (err) => { return "error"; }
+  });
+};
+
+export const fetchAddress5 = (addressId) => {
+  fetch(`https://blockchain.info/rawaddr/${addressId}`, {
+    method: 'GET',
+    async: false,
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*://*/*",
+      "Access-Control-Allow-Methods": "GET, POST",
+      "Access-Control-Allow-Headers": "Content-Type"
+    }
+  }).then(function(data) {
+    console.log(data.json().then(function(newData) {
+      console.log(newData);
+      return newData;
+    }));
+  });
 };

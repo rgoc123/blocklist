@@ -25,7 +25,7 @@ class App extends React.Component {
 
   updateAddressSearchState() {
     return e => this.setState({
-      address: e.currentTarget.value
+      searchAddress: e.currentTarget.value
     });
   }
 
@@ -34,7 +34,7 @@ class App extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let data = this.props.fetchAddress2(this.state.address);
+    let data = this.props.fetchAddress(this.state.searchAddress);
     if (data.status !== 200) {
       this.setState({
         currentShownAddress: "error"
@@ -46,6 +46,38 @@ class App extends React.Component {
         currentShownTxs: data.responseJSON.txs
       });
     }
+
+    // Below is an example of attempting to use fetch with headers and
+    // then promises. When the CORS Chrome extension is enabled it
+    // works, but not otherwise.
+    // let searchURL = "https://blockchain.info/rawaddr/" + this.state.searchAddress;
+    // fetch(searchURL, {
+    //   method: 'GET',
+    //   async: false,
+    //   mode: "cors",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Origin": "",
+    //     "Access-Control-Allow-Origin": "*://*/*",
+    //     "Access-Control-Allow-Methods": "GET, POST",
+    //     "Access-Control-Allow-Headers": "Content-Type"
+    //   }
+    // }).then((data) => {
+    //   if (data.ok) {
+    //     data.json().then((newData) => {
+    //       console.log(newData);
+    //       this.setState({
+    //         currentShownAddress: newData.address,
+    //         currentShownBalance: newData.final_balance,
+    //         currentShownTxs: newData.txs
+    //       });
+    //     });
+    //   } else {
+    //     this.setState({
+    //       currentShownAddress: "error"
+    //     });
+    //   }
+    // });
   }
 
   createAddressDiv() {
