@@ -25,7 +25,6 @@ fetch(searchURL, {
 }).then((data) => {
   if (data.ok) {
     data.json().then((newData) => {
-      console.log(newData);
       this.setState({
         currentShownAddress: newData.address,
         currentShownBalance: newData.final_balance,

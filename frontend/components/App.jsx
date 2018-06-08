@@ -29,9 +29,6 @@ class App extends React.Component {
     });
   }
 
-  // Create render errors
-  // Maybe by setting a state to error and adding an else if statement to createAddressDiv
-
   handleSubmit(e) {
     e.preventDefault();
 
@@ -41,7 +38,7 @@ class App extends React.Component {
       async: false,
       mode: "cors",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "text/plain",
         "Origin": "",
         "Access-Control-Allow-Origin": "*://*/*",
         "Access-Control-Allow-Methods": "GET, POST",
@@ -50,7 +47,6 @@ class App extends React.Component {
     }).then((data) => {
       if (data.ok) {
         data.json().then((newData) => {
-          console.log(newData);
           this.setState({
             currentShownAddress: newData.address,
             currentShownBalance: newData.final_balance,
