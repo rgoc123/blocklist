@@ -7,7 +7,7 @@ Simply enter a bitcoin address in the search field to see the data for that addr
 ![alt text](./app/assets/images/blocklist.gif)
 
 ### Code Examples
-To access the data from the Blockchain API, when the "Find Address" button is clicked, an fetch request is made combining the input bitcoin address with Blockchain's API address. Fetch was used because it's a web standard more modern than AJAX. Through promises, the fetch request updates the component's state with either the data or an error message.
+To access the data from the Blockchain API, when the "Find Address" button is clicked a fetch request is made combining the input bitcoin address with Blockchain's API address. Fetch was used because it's a web standard more modern than AJAX. Through promises, the fetch request updates the component's state with either the data or an error message.
 
 ```javascript
 let searchURL = "https://blockchain.info/rawaddr/" + this.state.searchAddress;
