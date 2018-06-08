@@ -19,6 +19,8 @@
   font-family: "Helvetica Neue";
   margin: 0;
   padding: 0;
+  background-color: #074B7A;
+  color: white;
 }
 
 h1 {
@@ -103,8 +105,10 @@ form {
 }
 
 #transactions {
-  height: 350px;
+  height: 325px;
   overflow: auto;
+  border: 1px solid white;
+  padding: 10px;
 }
 
 #transactions span {
@@ -113,11 +117,32 @@ form {
 
 li {
   list-style: none;
-  margin: 15px 0;
+  border-bottom: 1px solid white;
+  padding: 15px 0;
 }
 
 li:first-of-type {
-  margin-top: 0px;
+  padding-top: 0px;
+}
+
+#error-message {
+  border: 1px solid white;
+  width: 750px;
+  margin: 0 auto;
+  border-radius: 33px;
+  height: 63px;
+}
+
+#error-message-positioning-div {
+  width: 95%;
+  margin: auto;
+  margin-top: 7px;
+}
+
+p {
+  margin: 0 auto;
+  text-align: center;
+  padding: 3px 0;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

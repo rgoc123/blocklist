@@ -35,7 +35,6 @@ class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let data = this.props.fetchAddress2(this.state.address);
-    debugger
     if (data.status !== 200) {
       this.setState({
         currentShownAddress: "error"
@@ -69,7 +68,10 @@ class App extends React.Component {
     } else if (this.state.currentShownAddress === "error") {
       return (
         <div id="error-message">
-          <p>We're sorry. Either the address you entered is invalid or we don't have information on that particular address.</p>
+          <div id="error-message-positioning-div">
+            <p>We're sorry.</p>
+            <p>Either the address entered is invalid or we don't have information on that particular address.</p>
+          </div>
         </div>
       );
     } else {
