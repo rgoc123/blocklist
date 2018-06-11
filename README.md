@@ -2,9 +2,13 @@
 
 BLOCKLIST is an application that uses the blockchain.info API to find balance and transaction data on bitcoin addresses.
 
+![alt text](./app/assets/images/blocklist_main.png)
+
 Simply enter a bitcoin address in the search field to see the data for that address.
 
 ![alt text](./app/assets/images/blocklist.gif)
+
+The majority of the code takes place in the App.jsx file, where there are comments to explain the various blocks.
 
 ### Code Examples
 To access the data from the Blockchain API, when the "Find Address" button is clicked a fetch request is made combining the input bitcoin address with Blockchain's API address. Fetch was used because it's a web standard more modern than AJAX. Through promises, the fetch request updates the component's state with either the data or an error message.

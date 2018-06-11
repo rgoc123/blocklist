@@ -23,12 +23,20 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // Updates the search value that will be submitted when the
+  // "Find Address" button is clicked.
   updateAddressSearchState() {
     return e => this.setState({
       searchAddress: e.currentTarget.value
     });
   }
 
+  // This is the main search function for looking up bitcoin addresses.
+  // It makes the get request to the Blockchain API. If it successfully
+  // retrieves data it updates the component's state with the
+  // information that will be needed for rendering the bitcoin address'
+  // balance and transactions; otherwise, it will update the state with
+  // info needed to render the error message.
   handleSubmit(e) {
     e.preventDefault();
 
@@ -78,7 +86,13 @@ class App extends React.Component {
     // }
   }
 
+
+  // This makes the div that will have the search address' balance and
+  // transaction data.
   createAddressDiv() {
+    // This makes the makes all of the line items for the list of
+    // transactions for a bitcoin address, which will be appear in the UL
+    // below.
     let txs = this.state.currentShownTxs;
     function makeTxLIs(txs) {
       if (txs.length > 0) {
@@ -93,9 +107,13 @@ class App extends React.Component {
       }
     }
 
+    // This block creates either the address info div or the error
+    // message
     if (this.state.currentShownAddress === "") {
       return null;
     } else if (this.state.currentShownAddress === "error") {
+      // If the fetch request returns an error, the below error message
+      // is rendered.
       return (
         <div id="error-message">
           <div id="error-message-positioning-div">
@@ -105,6 +123,8 @@ class App extends React.Component {
         </div>
       );
     } else {
+      // If the fetch is successful, then a div with the address, balance,
+      // and list of transcations is created.
       return (
         <div id="address">
           <div id="address-info">
