@@ -43,6 +43,10 @@ fetch(searchURL, {
 });
 ```
 
+### Instructions
+- Clone or download this repo and cd into the folder
+- In terminal tab run "npm install" and then "rails s"
+- Go to localhost:3000 in Chrome, and install the extension below
 
 ### Requirements
 Due to Cross-Origin Resource Sharing (CORS), you must use Google Chrome and add the Allow-Control-Allow-Origin extension and turn it on. It's linked below.
